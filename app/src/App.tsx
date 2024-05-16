@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { RaceType } from "./type/RaceType";
+import { RaceType } from "./types/RaceType";
 import Timer from "./components/Timer";
 
 function App() {
