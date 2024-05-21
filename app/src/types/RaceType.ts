@@ -2,5 +2,6 @@ export type RaceType = {
   id: string;
   title: string;
   location: string;
-  targetDate: string
+  targetDate: string;
+  // unitOfMeasurement: string
 };

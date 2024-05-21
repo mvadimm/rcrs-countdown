@@ -2,45 +2,60 @@ import { useEffect, useState } from "react";
 import { RaceType } from "./types/RaceType";
 import Timer from "./components/Timer";
 
-function App() {
+const App = () => {
   const [races, setRaces] = useState<RaceType[]>([]);
 
-  async function fetchRaces(): Promise<RaceType[]> {
-    try {
-      const res = await fetch("http://localhost:3000/races");
-      const races = await res.json();
-      return races;
-    } catch (err) {
-      console.error(err);
-      throw err;
-    }
-  }
-
-  async function handleRaces() {
-    try {
-      const fetchedRaces = await fetchRaces();
-      setRaces(fetchedRaces);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
   useEffect(() => {
-    handleRaces();
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/races");
+        const fetchedRaces = await response.json();
+        setRaces(fetchedRaces);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
     <>
-      <div className="bg-backgroundColor flex h-full w-full flex-col items-center justify-center">
+      <main className="flex h-full w-full flex-col items-center justify-center bg-backgroundColor">
         {races.length > 0 && (
           <h1 className="my-2.5 text-center text-5xl font-semibold">
             {races[0].location}
           </h1>
         )}
-        <Timer targetDate={races.length > 0 ? races[0].targetDate : ""} />
-      </div>
+        <div className="my-7 flex flex-col flex-wrap items-center justify-center">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-12">
+            <Timer
+              targetDate={races.length > 0 ? races[0].targetDate : ""}
+              unitOfMeasurement={"days"}
+              color={"234, 53, 19"}
+            />
+            <Timer
+              targetDate={races.length > 0 ? races[0].targetDate : ""}
+              unitOfMeasurement={"hours"}
+              color={"244, 200, 68"}
+            />
+
+            <Timer
+              targetDate={races.length > 0 ? races[0].targetDate : ""}
+              unitOfMeasurement={"minutes"}
+              color={"238, 238, 238"}
+            />
+            <Timer
+              targetDate={races.length > 0 ? races[0].targetDate : ""}
+              unitOfMeasurement={"seconds"}
+              color={"57, 97, 164"}
+            />
+          </div>
+        </div>
+        <div className="w-full h-[2px] bg-borderColor"></div>
+      </main>
     </>
   );
-}
+};
 
 export default App;
