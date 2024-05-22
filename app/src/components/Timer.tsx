@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 
 type TimerProps = {
-  targetDate: string;
+  start: string;
   unitOfMeasurement: string;
   color: string;
+  end: string;
 };
 
-const Timer = ({ targetDate, unitOfMeasurement, color }: TimerProps) => {
+const Timer = ({ start, unitOfMeasurement, color, end }: TimerProps) => {
   const calculateTime = () => {
-    const difference = +new Date(targetDate) - +new Date();
+    const difference = +new Date(start) - +new Date();
     const time = { time: 0, line: 0 };
     if (difference > 0) {
       switch (unitOfMeasurement) {
@@ -40,7 +41,7 @@ const Timer = ({ targetDate, unitOfMeasurement, color }: TimerProps) => {
   };
 
   const [timeLeft, setTimeLeft] = useState(calculateTime());
-
+  
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(calculateTime());
@@ -76,6 +77,9 @@ const Timer = ({ targetDate, unitOfMeasurement, color }: TimerProps) => {
       </span>
     </div>
   );
+
+  
 };
 
 export default Timer;
+
