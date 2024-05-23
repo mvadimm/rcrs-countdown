@@ -1,15 +1,19 @@
 import { RaceType } from "../types/RaceType";
+import Card from "./Card";
 
-type EventList = {
+type CardsProps = {
   races: RaceType[];
 };
-const EventList = ({ races }: EventList) => {
-  console.log(races);
+
+const Cards = ({ races }: CardsProps) => {
   return (
     <div className="my-6 flex min-w-[550px] flex-col gap-5">
       <h3 className="my-4 text-lg font-bold">Предстоящие гонки</h3>
-      <div>{races[0].start}</div>
+      {races.map((race, id) => (
+        <Card key={id} race={race} />
+      ))}
     </div>
   );
 };
-export default EventList;
+
+export default Cards;

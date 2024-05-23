@@ -18,5 +18,19 @@ body,
   stroke-linecap: round;
   transform: rotate(270deg);
   transform-origin: center;
-  transition: stroke-dashoffset .25s ease-in-out;
+  transition: stroke-dashoffset 0.25s ease-in-out;
+}
+
+button {
+  transition: backgorund 0.2s ease;
+  z-index: 1;
+  touch-action: manipulation;
+}
+
+.i {
+  transition: transform 0.2s;
+}
+
+.i-closed {
+  transform: rotateX(180deg);
 }

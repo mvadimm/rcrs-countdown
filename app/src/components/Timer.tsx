@@ -4,10 +4,9 @@ type TimerProps = {
   start: string;
   unitOfMeasurement: string;
   color: string;
-  end: string;
 };
 
-const Timer = ({ start, unitOfMeasurement, color, end }: TimerProps) => {
+const Timer = ({ start, unitOfMeasurement, color }: TimerProps) => {
   const calculateTime = () => {
     const difference = +new Date(start) - +new Date();
     const time = { time: 0, line: 0 };
