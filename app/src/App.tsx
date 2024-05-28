@@ -37,7 +37,7 @@ const App = () => {
 
   if (isLoading) {
     return (
-      <main className="flex h-full w-full flex-col items-center justify-center bg-backgroundColor">
+      <main className="flex h-[100vh] w-full flex-col items-center justify-center bg-backgroundColor">
         Loading...
       </main>
     );
@@ -54,7 +54,7 @@ const App = () => {
   return (
     <>
       <main className="flex h-full w-full flex-col items-center justify-center bg-backgroundColor">
-        <h1 className="my-2.5 text-center text-5xl font-semibold">
+        <h1 className="text-3xl my-2.5 text-center md:text-5xl font-semibold">
           {races[0].location}
         </h1>
 
@@ -64,7 +64,7 @@ const App = () => {
           </div>
         ) : (
           <div className="my-7 flex flex-col flex-wrap items-center justify-center">
-            <div className="flex flex-row flex-wrap items-center justify-center gap-12">
+            <div className="flex flex-row flex-wrap items-center justify-center gap-[25px] md:gap-[50px]">
               <Timer
                 start={races[0].start}
                 unitOfMeasurement={"days"}

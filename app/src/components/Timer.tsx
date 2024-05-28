@@ -40,7 +40,17 @@ const Timer = ({ start, unitOfMeasurement, color }: TimerProps) => {
   };
 
   const [timeLeft, setTimeLeft] = useState(calculateTime());
-  
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(calculateTime());
@@ -48,37 +58,41 @@ const Timer = ({ start, unitOfMeasurement, color }: TimerProps) => {
     return () => clearInterval(timer);
   });
 
+  const r = isSmallScreen ? 64.5 : 129;
+  const strokeWidth = isSmallScreen ? 6 : 12;
+  const strokeDasharray = 2 * Math.PI * r;
+  const strokeDashoffset = isSmallScreen ? timeLeft.line / 2 : timeLeft.line;
+
   return (
-    <div className="relative flex h-[270px] w-[270px] flex-col items-center justify-center gap-4">
-      <svg className="absolute h-[270px] w-[270px]">
+    <div className="relative flex h-[135px] w-[135px] flex-col items-center justify-center md:h-[270px] md:w-[270px]">
+      <svg className="absolute h-[135px] w-[135px] md:h-[270px] md:w-[270px]">
         <circle
           className="countdown fill-transparent"
           cx="50%"
           cy="50%"
-          r="129px"
+          r={`${r}px`}
           stroke={`rgb(${color})`}
-          strokeWidth={12}
-          strokeDasharray={2 * Math.PI * 129}
-          strokeDashoffset={timeLeft.line}
+          strokeWidth={strokeWidth}
+          strokeDasharray={strokeDasharray}
+          strokeDashoffset={strokeDashoffset}
         ></circle>
         <circle
           className="fill-transparent opacity-20"
           cx="50%"
           cy="50%"
-          r="129px"
+          r={`${r}px`}
           stroke={`rgb(${color})`}
-          strokeWidth={12}
+          strokeWidth={strokeWidth}
         ></circle>
       </svg>
-      <span className="text-6xl font-bold">{timeLeft.time}</span>
-      <span className="text-2xl text-secondaryTextColor">
+      <span className="md:py-3 text-[36px]  font-bold md:text-6xl">
+        {timeLeft.time}
+      </span>
+      <span className="text-[16px] md:py-3 text-secondaryTextColor md:text-2xl">
         {unitOfMeasurement}
       </span>
     </div>
   );
-
-  
 };
 
 export default Timer;
-

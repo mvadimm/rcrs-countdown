@@ -8,8 +8,6 @@ html,
 body,
 #root,
 .app {
-  height: 100%;
-  width: 100%;
   font-family: "Poppins", sans-serif;
   @apply text-mainTextColor;
 }
@@ -26,11 +24,6 @@ button {
   z-index: 1;
   touch-action: manipulation;
 }
-
-.i {
-  transition: transform 0.2s;
-}
-
-.i-closed {
-  transform: rotateX(180deg);
+.resolution {
+  width: min(90vw, 550px);
 }
